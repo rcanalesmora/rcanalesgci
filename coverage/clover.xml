@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1579558279033" clover="3.2.0">
-  <project timestamp="1579558279033" name="All files">
+<coverage generated="1579559778589" clover="3.2.0">
+  <project timestamp="1579559778589" name="All files">
     <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3" elements="7" coveredelements="7" complexity="0" loc="4" ncloc="4" packages="1" files="1" classes="1"/>
     <file name="index.ts" path="/Users/rcanales/Library/Mobile Documents/com~apple~CloudDocs/rcanalesgci/src/index.ts">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
