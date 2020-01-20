@@ -1,17 +1,8 @@
 module.exports = {
-  roots: ["<rootDir>/src/test/"],
-  rootDir: "<rootDir>/src/test/",
-
-  testMatch: [
-    "**/__tests__/**/*.+(ts|tsx|js)",
-    "**/?(*.)+(spec|test).+(ts|tsx|js)"
-  ],
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest"
   },
-  globals: {
-    "ts-jest": {
-      packageJson: "package.json"
-    }
-  }
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  setupFiles: ["<rootDir>./src/test/suma.test.ts"]
 };
