@@ -1,0 +1,22 @@
+{
+  "name": "rcanalesgci",
+  "version": "1.0.0",
+  "description": "Esqueleto para proyectos con CI",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcanalesmora/rcanalesgci.git"
+  },
+  "author": "Roberto Canales",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rcanalesmora/rcanalesgci/issues"
+  },
+  "homepage": "https://github.com/rcanalesmora/rcanalesgci#readme",
+  "devDependencies": {
+    "typescript": "^3.7.5"
+  }
+}
