@@ -11,11 +11,9 @@ FNDA:6,(anonymous_3)
 DA:1,1
 DA:2,12
 DA:3,1
-DA:5,1
-DA:6,1
 DA:8,1
-LF:6
-LH:6
+LF:4
+LH:4
 BRF:0
 BRH:0
 end_of_record
