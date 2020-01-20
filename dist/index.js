@@ -15,3 +15,4 @@ var Operaciones = /** @class */ (function () {
 exports.Operaciones = Operaciones;
 var a = 10;
 var b = 20;
+console.log("hola mundo");
