@@ -2,9 +2,9 @@
   "name": "rcanalesgci",
   "version": "1.0.0",
   "description": "Esqueleto para proyectos con CI",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rcanalesmora/rcanalesgci#readme",
   "devDependencies": {
+    "jest": "^24.9.0",
     "typescript": "^3.7.5"
   }
 }
