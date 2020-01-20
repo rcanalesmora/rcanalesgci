@@ -13,6 +13,6 @@ var Operaciones = /** @class */ (function () {
     return Operaciones;
 }());
 exports.Operaciones = Operaciones;
-var a = 10;
-var b = 20;
+// let a = 10;
+// let b = 20;
 console.log("hola mundo");
