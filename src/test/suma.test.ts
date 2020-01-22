@@ -1,5 +1,4 @@
 import { Operaciones } from "../index";
-
 test("suma sin parametros", () => {
   expect(Operaciones.sum()).toBe(0);
 });
