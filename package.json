@@ -33,5 +33,9 @@
     "prettier": "^1.19.1",
     "ts-jest": "^24.3.0",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@types/node": "^13.5.0",
+    "acorn": "^7.1.0"
   }
 }
