@@ -1,18 +1,8 @@
 let request = require("request");
 
-interface INoticiaNasa {
-  copyright: string;
-  date: string;
-  explanation: string;
-  hdurl: string;
-  media_type: string;
-  service_version: string;
-  title: string;
-  url: string;
-}
-
 class GestorNoticiasNASA {
   peticion: any = null;
+  respuesta: any = "todavía Nada";
   URL: string = "";
 
   constructor(URL: string) {
@@ -23,15 +13,26 @@ class GestorNoticiasNASA {
     if (error) {
       throw new Error(error);
     } else {
-      let objeto: INoticiaNasa = JSON.parse(response.body);
-      console.log(objeto.copyright);
+      console.log("----------- Dentro de la función --------------");
+      console.log(response.body);
+      this.respEst = response.body;
+
+      console.log("----------- Estructura --------------");
+      console.log(this.respEst);
     }
   };
 
   recupera() {
-    let options = { method: "GET", url: this.URL, headers: {} };
+    //creamos estructura
+    let options = {
+      method: "GET",
+      url: this.URL,
+      headers: {}
+    };
 
     this.peticion = request(options, this.anima);
+    console.log("----------- Despues de la función --------------");
+    console.log(this.respuesta);
   }
 }
 
@@ -40,3 +41,14 @@ let gestorNASA = new GestorNoticiasNASA(
 );
 
 gestorNASA.recupera();
+console.log("----------- Fuera de la función--------------");
+console.log(gestorNASA.respuesta);
+
+for (var i = 0; i < 5; i++) {
+  setTimeout(function() {
+    console.log(new Date()); //It's you code
+  }, (i + i + 1) * 1000);
+}
+
+console.log("-----------final del retraso asincrono --------------");
+console.log(gestorNASA.respuesta);
