@@ -1,0 +1,5 @@
+#instalar jest en el directorio de trabajo
+npm – install —save-dev jest
+
+#actualizar las dependencias
+npm update
