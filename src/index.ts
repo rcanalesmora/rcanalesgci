@@ -1,60 +1,111 @@
 class JuegoDeLaVida {
   timer: any;
-  tama = { x: 0, y: 0 };
-  dim = { x: 0, y: 0 };
+  tama = { anchoCanvas: 0, altoCanvas: 0 };
+  dim = { columnas: 0, filas: 0 };
   color: string = "FFFFFF";
-  tamaCuadrado: number = 10;
+  tamaCuadrado: number = 5;
   matriz: number[][];
-
   ctx: CanvasRenderingContext2D;
 
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
-    this.tama.x = ctx.canvas.width;
-    this.tama.y = ctx.canvas.height;
+    this.tama.anchoCanvas = ctx.canvas.width;
+    this.tama.altoCanvas = ctx.canvas.height;
 
-    this.dim.x = this.tama.x / this.tamaCuadrado;
-    this.dim.y = this.tama.y / this.tamaCuadrado;
+    this.dim.columnas = this.tama.anchoCanvas / this.tamaCuadrado;
+    this.dim.filas = this.tama.altoCanvas / this.tamaCuadrado;
 
     this.matriz = new Array<Array<number>>();
 
-    for (let i = 0; i < this.dim.x; i++) {
-      let fila: number[] = new Array<number>();
+    for (let fila = 0; fila < this.dim.filas; fila++) {
+      let filaArray: number[] = new Array<number>();
 
-      for (let j = 0; j < this.dim.y; j++) {
-        fila.push( Math.round (Math.random() * 2 ) );
+      for (let columna = 0; columna < this.dim.columnas; columna++) {
+        filaArray.push(Math.round(Math.random() * 2));
       }
 
-      this.matriz.push(fila);
+      this.matriz.push(filaArray);
+    }
+  }
+
+  dimeVecinos(columna: number, fila: number, matriz: number[][]): number {
+    let filaInicio: number = fila;
+    let filaFin: number = fila;
+    let columnaInicio: number = columna;
+    let columnaFin: number = columna;
+
+    let contador: number = 0;
+
+    if (fila > 0) {
+      filaInicio--;
+    }
+    if (fila < this.dim.filas - 1) {
+      filaFin++;
     }
 
-    console.log(this.matriz);
+    if (columna > 0) {
+      columnaInicio--;
+    }
+    if (columna < this.dim.columnas - 1) {
+      columnaFin++;
+    }
+
+    for (let a = filaInicio; a <= filaFin; a++) {
+      for (let b = columnaInicio; b <= columnaFin; b++) {
+        if (fila == a && columna == b) {
+          // ignorar la propia casilla
+        } else {
+          contador += matriz[a][b];
+        }
+      }
+    }
+
+    return contador;
   }
 
-  arranca(documento: Document): void {
-    console.log("Arrancamos juego");
-  }
+  creaMatrizVacia(): number[][] {
+    let matrizAux: number[][] = new Array<Array<number>>();
 
-  procesa( x: number, y: number, array : number[][])
-  {
+    for (let fila = 0; fila < this.dim.filas; fila++) {
+      let filaArray: number[] = new Array<number>();
 
+      for (let columna = 0; columna < this.dim.columnas; columna++) {
+        filaArray.push(0);
+      }
+
+      matrizAux.push(filaArray);
+    }
+    return matrizAux;
   }
 
   nuevaGeneracion() {
-    
-    for (let i = 0; i < this.dim.y; i++) {
-      for (let j = 0; j < this.dim.x; j++) {     
-          this.procesa(i,j,this.matriz);
+    let matrizAux: number[][] = this.creaMatrizVacia();
+
+    for (let fila = 0; fila < this.dim.filas; fila++) {
+      for (let columna = 0; columna < this.dim.columnas; columna++) {
+        let vecinos: number = this.dimeVecinos(columna, fila, this.matriz);
+
+        if (this.matriz[fila][columna] == 0 && vecinos == 3) {
+          matrizAux[fila][columna] = 1;
+        } else if (
+          this.matriz[fila][columna] == 1 &&
+          (vecinos == 2 || vecinos == 3)
+        ) {
+          matrizAux[fila][columna] = 1;
+        } else {
+          matrizAux[fila][columna] = 0;
+        }
       }
     }
 
+    this.matriz = matrizAux;
   }
 
-  pintaCasilla(x: number, y: number, color: string) {
+  pintaCasilla(columna: number, fila: number, color: string) {
     this.ctx.fillStyle = color;
     this.ctx.fillRect(
-      x * this.tamaCuadrado + 1,
-      y * this.tamaCuadrado + 1,
+      columna * this.tamaCuadrado + 1,
+      fila * this.tamaCuadrado + 1,
       this.tamaCuadrado - 2,
       this.tamaCuadrado - 2
     );
@@ -62,20 +113,19 @@ class JuegoDeLaVida {
 
   pinta() {
     this.ctx.fillStyle = "#0000FF";
-    this.ctx.fillRect(0, 0, this.tama.x, this.tama.y);
+    this.ctx.fillRect(0, 0, this.tama.anchoCanvas, this.tama.altoCanvas);
 
-    for (let i = 0; i < this.dim.y; i++) {
-      for (let j = 0; j < this.dim.x; j++) {
-       
-        if (this.matriz[i][j] == 0) {
+    for (let fila = 0; fila < this.dim.filas; fila++) {
+      for (let columna = 0; columna < this.dim.columnas; columna++) {
+        if (this.matriz[fila][columna] == 0) {
           this.color = "#FFFFFF";
-        } else if (this.matriz[i][j] == 1) {
+        } else if (this.matriz[fila][columna] == 1) {
           this.color = "#000000";
         } else {
           this.color = "#00FF000";
         }
 
-        this.pintaCasilla(i, j, this.color);
+        this.pintaCasilla(fila, columna, this.color);
       }
     }
   }
@@ -104,7 +154,5 @@ function main() {
   }
 
   juego = new JuegoDeLaVida(ctx);
-  // juego.creaElementos();
-  juego.arranca(document);
-  juego.timer = setInterval(juego.anima, 1000);
+  juego.timer = setInterval(juego.anima, 100);
 }
