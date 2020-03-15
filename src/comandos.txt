@@ -3,3 +3,12 @@ npm – install —save-dev jest
 
 #actualizar las dependencias
 npm update
+
+Inslatar ts-mockito
+npm install ts-mockito --save-dev
+
+Quitar vilnerabilidades
+npm audit fix
+
+Forzar corregir vulnerabilidades
+npm audit fix --force

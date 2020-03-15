@@ -1,4 +1,7 @@
 module.exports = {
+  collectCoverage: true,
+  coverageDirectory: "./coverage",
+
   roots: ["<rootDir>/src"],
   testMatch: [
     "**/__tests__/**/*.+(ts|tsx|js)",
